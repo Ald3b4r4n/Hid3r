@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hid3r - Castlevania</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0a">
+</head>
+<body>
+    <div id="comic-container" onclick="nextPanel()">
+        <img id="comic-image" src="imagens/richter.png" alt="Cena Castlevania" class="pixel-corners">
+        <div id="speech-bubble" class="speech-bubble pixel-corners">Die monster, you don't belong in this world.</div>
+    </div>
+
+    <div id="input-section" class="section pixel-corners">
+        <h2 class="title">Prova de Conhecimento</h2>
+        <input type="text" id="userInput" placeholder="Sua resposta..." autocomplete="off">
+        <button onclick="checkInput()">Enviar</button>
+    </div>
+
+    <div id="password-section" class="section pixel-corners">
+        <h2 class="title">Portões de Castlevania</h2>
+        <img id="castle-image" src="imagens/portoes_fechados.jpg" alt="Portões Fechados" class="pixel-corners">
+        <input type="password" id="passwordInput" placeholder="Senha Secreta" autocomplete="off">
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
+
+    <div id="app-section" class="section pixel-corners">
+        <h2 class="title">Hid3r - Tome dos Contatos</h2>
+        <div class="input-group">
+            <input type="text" id="contactName" placeholder="Nome" autocomplete="off">
+            <input type="tel" id="contactNumber" placeholder="Número com DDD" pattern="[0-9]{11}">
+            <button onclick="addContact()">Invocar Contato</button>
+        </div>
+        <ul id="contactList"></ul>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => console.log('SW registered:', registration))
+                    .catch(error => console.log('SW registration failed:', error));
+            });
+        }
+    </script>
+</body>
+</html>
