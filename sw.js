@@ -10,7 +10,8 @@ const ASSETS = [
   '/imagens/dracula_laugh.png',
   '/imagens/portoes_fechados.jpg',
   '/imagens/portoes_abertos.jpg',
-  '/imagens/background.jpg'
+  '/imagens/icon-512.png',
+  '/imagens/icon-192.png'
 ];
 
 self.addEventListener('install', event => {
