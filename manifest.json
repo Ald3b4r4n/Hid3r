@@ -1,7 +1,7 @@
 {
   "name": "Hid3r",
   "short_name": "Hid3r",
-  "start_url": "/Hid3r",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#8b0000",
