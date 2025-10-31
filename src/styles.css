@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --parchment: #f5e7c1;
+}
+
+body{ font-family: 'MedievalSharp', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial }
+
+.border-blood { border-color: #8b0000 }
+.text-parchment { color: var(--parchment) }
+
+/* Halloween theme */
+.halloween-bg {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(255,140,0,0.15), transparent 60%),
+    radial-gradient(800px 400px at 90% 10%, rgba(199, 21, 133, 0.12), transparent 60%),
+    linear-gradient(180deg, #0a0a0a 0%, #120812 40%, #0a0a0a 100%);
+  color: var(--parchment);
+}
+
+.halloween-bg::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 20 20"><circle cx="2" cy="2" r="0.7" fill="rgba(255,255,255,0.04)"/><circle cx="10" cy="6" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="16" cy="3" r="0.4" fill="rgba(255,255,255,0.03)"/></svg>');
+  background-repeat: repeat;
+  opacity: 0.9;
+}
+
+.glow-gold { box-shadow: 0 0 12px rgba(212, 175, 55, 0.35) }
+.glow-blood { box-shadow: 0 0 12px rgba(139, 0, 0, 0.35) }
