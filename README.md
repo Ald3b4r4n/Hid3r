@@ -1,67 +1,128 @@
-# Hid3r — Tome dos Contatos (Refactor)
+# Hid3r — Tome dos Contatos
 
-Este rework moderniza o projeto original usando Vite + Tailwind + ES modules. O objetivo é:
+Uma aplicação web interativa que combina elementos de quadrinhos, testes de conhecimento e um sistema de contatos, desenvolvida com tecnologias modernas.
 
-- Usar Tailwind para estilização.
-- Modularizar o JavaScript (ES modules).
-- Usar bibliotecas modernas para animações (GSAP).
-- Manter um backup local do config sensível para desenvolvimento.
-- Preparar para deploy no Vercel usando variáveis de ambiente.
+## 🚀 Tecnologias Utilizadas
 
-## Como rodar localmente
+### Runtime & Ferramentas
+- **Node.js**: v22.17.0
+- **npm**: v10.9.2
 
-Pré-requisitos: Node.js 18+ (ou LTS moderna)
+### Framework & Build
+- **Vite**: ^4.4.9 (bundler e dev server)
 
-1. Instale dependências:
+### Dependências Principais
+- **Firebase**: ^10.7.1 (backend e banco de dados)
+- **GSAP**: ^3.12.0 (animações)
 
-```powershell
+### Desenvolvimento & Estilização
+- **Tailwind CSS**: ^3.4.14 (framework CSS utilitário)
+- **PostCSS**: ^8.4.47 (processador CSS)
+- **Autoprefixer**: ^10.4.20 (prefixos CSS automáticos)
+
+### Qualidade de Código
+- **ESLint**: ^8.46.0 (linter JavaScript)
+
+## 📋 Pré-requisitos
+
+- Node.js 18+ (recomendado: v22.17.0 ou superior)
+- npm 8+ (recomendado: v10.9.2 ou superior)
+
+## 🛠️ Instalação e Execução
+
+### 1. Instalar dependências
+```bash
 npm install
 ```
 
-2. Rodar em dev:
-
-```powershell
+### 2. Executar em modo desenvolvimento
+```bash
 npm run dev
-# abre http://localhost:5173 por padrão (ou o porto mostrado pelo Vite)
 ```
+A aplicação estará disponível em `http://localhost:5173`
 
-3. Build para produção:
-
-```powershell
+### 3. Build para produção
+```bash
 npm run build
 npm run preview
 ```
 
-## Variáveis de ambiente (Vercel)
+### 4. Verificar qualidade do código
+```bash
+npm run lint
+```
 
-Configure os seguintes valores no dashboard do Vercel (prefixados com VITE_ para serem injetados pelo Vite):
+## ⚙️ Configuração de Ambiente
 
-- VITE_FIREBASE_API_KEY
-- VITE_FIREBASE_AUTH_DOMAIN
-- VITE_FIREBASE_PROJECT_ID
-- VITE_FIREBASE_STORAGE_BUCKET
-- VITE_FIREBASE_MESSAGING_SENDER_ID
-- VITE_FIREBASE_APP_ID
+### Desenvolvimento Local
+O projeto utiliza `local_config_backup.json` (gitignored) para configuração local do Firebase.
 
-Se não quiser configurar env vars localmente, existe `local_config_backup.json` (gitignored) que contém o config original — ele será usado somente em desenvolvimento.
+### Produção (Vercel)
+Configure as seguintes variáveis de ambiente no dashboard do Vercel:
 
-## Segurança e notas
+```
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_APP_ID
+```
 
-- O backup local contém chaves sensíveis e NÃO deve ser comitado (já está em `.gitignore`).
-- Em produção configure as variáveis de ambiente diretamente no provedor (Vercel).
-- Recomendamos revisar as regras do Firestore para garantir acesso mínimo.
+## 📁 Estrutura do Projeto
 
-## Estrutura do projeto
+```
+├── public/
+│   └── imagens/          # Assets estáticos (imagens)
+├── src/
+│   ├── main.js           # Ponto de entrada da aplicação
+│   ├── styles.css        # Estilos globais
+│   ├── ui/
+│   │   ├── App.js        # Componente principal
+│   │   ├── Comic.js      # Componente de quadrinhos
+│   │   ├── Tests.js      # Sistema de testes
+│   │   └── Contacts.js   # Sistema de contatos
+│   ├── services/
+│   │   └── firebase.js   # Configuração e serviços Firebase
+│   └── utils/
+│       └── dom.js        # Utilitários DOM
+├── index.html            # Template HTML principal
+├── manifest.json         # Manifesto PWA
+└── sw.js                # Service Worker
+```
 
-- `index.html` — entrada
-- `src/main.js` — bootstrap
-- `src/ui/*` — componentes (Comic, Tests, Contacts)
-- `src/services/firebase.js` — wrapper de Firestore e backup local
-- `local_config_backup.json` — backup local (gitignored)
+## 🎮 Funcionalidades
 
-## Melhorias possíveis
+- **Quadrinhos Interativos**: Visualização de painéis com animações GSAP
+- **Sistema de Testes**: Testes de conhecimento com feedback visual
+- **Tome de Contatos**: Sistema de gerenciamento de contatos com Firebase
+- **Animações**: Transições suaves e efeitos visuais
+- **Responsivo**: Interface adaptável para diferentes dispositivos
 
-- Mock de Firestore para testes offline
-- Unit tests para funções utilitárias
-- CI com lint + build on push
-# Hid3r
+## 🔒 Segurança
+
+- Configurações sensíveis do Firebase são mantidas em variáveis de ambiente
+- Backup local não é versionado (`.gitignore`)
+- Recomenda-se revisar as regras de segurança do Firestore
+
+## 🚀 Deploy
+
+O projeto está configurado para deploy no Vercel com suporte a:
+- Build automático via Vite
+- Variáveis de ambiente para configuração do Firebase
+- Otimização automática de assets
+
+## 📝 Scripts Disponíveis
+
+- `npm run dev` - Inicia servidor de desenvolvimento
+- `npm run build` - Gera build de produção
+- `npm run preview` - Preview do build de produção
+- `npm run lint` - Executa verificação de código
+
+## 🔄 Melhorias Futuras
+
+- [ ] Testes unitários com Vitest
+- [ ] Mock do Firestore para desenvolvimento offline
+- [ ] CI/CD com GitHub Actions
+- [ ] Otimização de performance com lazy loading
+- [ ] Suporte a PWA completo

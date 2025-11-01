@@ -18,7 +18,7 @@ export default function Tests() {
   const pwSection = createElement('div', { id: 'password-section', class: 'hidden space-y-3' })
   pwSection.innerHTML = `
     <h3 class="text-gold text-xl">Portões de Castlevania</h3>
-    <img id="castle-image" src="/imagens/portoes_fechados.jpg" class="w-full rounded border-2 border-blood" draggable="false" />
+    <img id="castle-image" src="imagens/portoes_fechados.jpg" class="w-full rounded border-2 border-blood" draggable="false" />
     <input id="passwordInput" type="password" placeholder="Senha Secreta" class="w-full p-2 rounded bg-black/60 border border-gold text-parchment" />
     <button id="pw-btn" class="px-4 py-2 bg-blood text-white rounded">Entrar</button>
   `
@@ -48,12 +48,20 @@ export default function Tests() {
     const correctPassword = import.meta.env.VITE_PASSWORD?.toLowerCase() || 'alucard'
     const castle = document.getElementById('castle-image')
     if (password === correctPassword) {
-      // crossfade para portões abertos
-      gsap.to(castle, { opacity: 0.2, duration: 0.4, onComplete: () => {
-        castle.src = '/imagens/portoes_abertos.jpg'
-        gsap.to(castle, { opacity: 1, duration: 0.6 })
+      // sequência de abertura dos portões: fechados -> semi_abertos -> abertos (1s cada)
+      gsap.to(castle, { opacity: 0.2, duration: 0.3, onComplete: () => {
+        castle.src = 'imagens/portoes_semi_abertos.jpg'
+        gsap.to(castle, { opacity: 1, duration: 0.4, onComplete: () => {
+          // após 1 segundo, mostrar portões totalmente abertos
+          setTimeout(() => {
+            gsap.to(castle, { opacity: 0.2, duration: 0.3, onComplete: () => {
+              castle.src = 'imagens/portoes_abertos.jpg'
+              gsap.to(castle, { opacity: 1, duration: 0.4 })
+            }})
+          }, 1000)
+        }})
       }})
-      // após 2.5 segundos, abrir o tomo de contatos
+      // após 3 segundos total, abrir o tomo de contatos
       setTimeout(() => {
         // fechar fase dos portões e da prova, abrir o tomo de contatos
         document.getElementById('password-section').classList.add('hidden')
@@ -63,7 +71,7 @@ export default function Tests() {
         const contacts = document.getElementById('contacts-section')
         contacts.classList.remove('hidden')
         contacts.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 2500)
+      }, 3000)
     } else {
       alert('Senha incorreta!')
     }
